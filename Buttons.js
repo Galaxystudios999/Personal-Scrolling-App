@@ -29,3 +29,19 @@ forYouBtn.addEventListener('click', () => {
         videoObserver.observe(slide);
     });
 });
+
+// Handle Like Button Toggles
+container.addEventListener('click', function(event) {
+    // Check if the user clicked the like button or the SVG inside it
+    const likeBtn = event.target.closest('.like-btn');
+    
+    if (likeBtn) {
+        // Prevent the click from fighting with any background pause/play features
+        event.stopPropagation(); 
+        
+        // Toggle the 'liked' class on/off
+        likeBtn.classList.toggle('liked');
+        
+        console.log("Like toggled!");
+    }
+});
