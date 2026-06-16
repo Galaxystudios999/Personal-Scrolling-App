@@ -15,7 +15,6 @@ body, html {
   scroll-snap-type: y mandatory; 
   scroll-behavior: smooth;
   
-  /* Hides scrollbars */
   -ms-overflow-style: none;  
   scrollbar-width: none; 
 }
@@ -41,4 +40,78 @@ video {
   object-fit: cover; 
   border-radius: 2px; 
   display: block;
+}
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; 
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+  pointer-events: none;
+}
+
+.header-tab {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  position: relative;
+  pointer-events: auto;
+  transition: color 0.2s ease;
+}
+
+
+.header-tab.active {
+  color: #fff;
+}
+
+
+.header-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+
+.homepage-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #121212;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+#topText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
 }
