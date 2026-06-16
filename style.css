@@ -3,18 +3,18 @@ body, html {
   padding: 0;
   width: 100vw;  
   height: 100vh;  
-  overflow: hidden; 
+  overflow: hidden; /* Keeps the main window locked */
   background-color: #000;
   font-family: sans-serif;
+  overscroll-behavior: none;
 }
 
 .tiktok-container {
   width: 100%;
-  height: 100%;
+  height: 100vh; /* Force exact viewport height */
   overflow-y: scroll; 
   scroll-snap-type: y mandatory; 
   scroll-behavior: smooth;
-  
   -ms-overflow-style: none;  
   scrollbar-width: none; 
 }
@@ -25,8 +25,9 @@ body, html {
 
 .video-slide {
   width: 100vw;  
-  height: 100vh; 
+  height: 100vh; /* Must match container height perfectly */
   scroll-snap-align: start; 
+  scroll-snap-stop: always; /* Forces it to stop on every single slide */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,6 +43,24 @@ video {
   display: block;
 }
 
+/* Homepage setup */
+.homepage-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #121212;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto; /* Allow homepage to scroll normally if content is long */
+}
+
+/* Perfect hidden utility */
+.hidden {
+  display: none !important;
+}
+
 .app-header {
   position: fixed;
   top: 0;
@@ -51,33 +70,34 @@ video {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px; 
-  z-index: 10;
+  gap: 20px; /* Space between Home and For You buttons */
+  z-index: 10; /* Keeps it floating above the videos */
   background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
-  pointer-events: none;
+  pointer-events: none; /* Let clicks pass through the empty space to the videos */
 }
 
+/* Reset button styling to look like crisp text tabs */
 .header-tab {
   background: none;
   border: none;
   padding: 0;
   font-family: inherit;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.6); /* Faded white for the inactive tab */
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.5px;
   position: relative;
-  pointer-events: auto;
+  pointer-events: auto; /* Makes sure the buttons themselves ARE clickable */
   transition: color 0.2s ease;
 }
 
-
+/* Bright white for the active tab */
 .header-tab.active {
   color: #fff;
 }
 
-
+/* The little under-line indicator under the active tab */
 .header-tab.active::after {
   content: '';
   position: absolute;
@@ -88,30 +108,4 @@ video {
   height: 3px;
   background-color: #fff;
   border-radius: 2px;
-}
-
-
-.homepage-container {
-  width: 100vw;
-  height: 100vh;
-  background-color: #121212;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 20px;
-}
-
-
-.hidden {
-  display: none !important;
-}
-
-#topText {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
 }

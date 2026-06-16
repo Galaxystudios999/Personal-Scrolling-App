@@ -1,33 +1,31 @@
 const forYouBtn = document.getElementById('forYouBtn');
 const homeBtn = document.getElementById('homeBtn');
-const videoFeed = document.querySelector('.tiktok-container');
+const videoFeed = document.getElementById('videoFeed');
 const homePage = document.getElementById('homePage');
 
-
+// Switch to Homepage view
 homeBtn.addEventListener('click', () => {
-    
     homeBtn.classList.add('active');
     forYouBtn.classList.remove('active');
-    
     
     homePage.classList.remove('hidden');
     videoFeed.classList.add('hidden');
     
-
-    document.querySelectorAll('video').forEach(video => {
-        video.pause();
-    });
+    // Pause everything running
+    document.querySelectorAll('video').forEach(video => video.pause());
 });
 
+// Switch to For You video feed view
 forYouBtn.addEventListener('click', () => {
-    
     forYouBtn.classList.add('active');
     homeBtn.classList.remove('active');
-    
     
     videoFeed.classList.remove('hidden');
     homePage.classList.add('hidden');
     
-   
-    window.dispatchEvent(new Event('resize'));
+    // CRITICAL: Disconnect and reconnect the observer so it recalculates what's on screen
+    document.querySelectorAll('.video-slide').forEach(slide => {
+        videoObserver.unobserve(slide);
+        videoObserver.observe(slide);
+    });
 });
